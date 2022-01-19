@@ -4,6 +4,16 @@
 
 {% block content %}
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissable fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {{message}}
+        </div>
+    {% endfor %}
+
+{% endif %}
+
 {%  if all_items %}
 
     <table class="table table-bordered table-dark">
@@ -12,14 +22,13 @@
                 <tr class = "table-success">
                     <td class="striker" style="text-align :center;">{{items.item}} </td>
                     <td style="text-align :center;">{{items.completed}}</td>
-                    <td style="text-align :center;">Delete</td>
-
+                    <td style="text-align :center;"><a href="{% url 'delete' items.id %}">delete</a></td>
                 </tr>
             {% else %}
             <tr class = "table-secondary">
                 <td style="text-align :center;">{{items.item}} </td>
                 <td style="text-align :center;">{{items.completed}}</td>
-                <td style="text-align :center;">Delete</td>
+                <td style="text-align :center;"><a href="{% url 'delete' items.id %}">delete</a></td>
 
             </tr>
             {% endif %}
